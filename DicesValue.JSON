@@ -1,0 +1,129 @@
+[{
+    "id_dice":"0",
+    "face0":"E",
+    "face1":"T",
+    "face2":"U",
+    "face3":"K",
+    "face4":"N",
+    "face5":"O"
+},{
+    "id_dice":"1",
+    "face0":"E",
+    "face1":"V",
+    "face2":"G",
+    "face3":"T",
+    "face4":"I",
+    "face5":"N"
+},{
+    "id_dice":"2",
+    "face0":"E",
+    "face1":"D",
+    "face2":"C",
+    "face3":"A",
+    "face4":"M",
+    "face5":"P"
+},{
+    "id_dice":"3",
+    "face0":"I",
+    "face1":"E",
+    "face2":"L",
+    "face3":"R",
+    "face4":"U",
+    "face5":"W"
+},{
+    "id_dice":"4",
+    "face0":"E",
+    "face1":"H",
+    "face2":"I",
+    "face3":"F",
+    "face4":"S",
+    "face5":"E"
+},{
+    "id_dice":"5",
+    "face0":"R",
+    "face1":"E",
+    "face2":"C",
+    "face3":"A",
+    "face4":"L",
+    "face5":"S"
+},{
+    "id_dice":"6",
+    "face0":"E",
+    "face1":"N",
+    "face2":"T",
+    "face3":"D",
+    "face4":"O",
+    "face5":"S"
+},{
+    "id_dice":"7",
+    "face0":"O",
+    "face1":"F",
+    "face2":"X",
+    "face3":"R",
+    "face4":"I",
+    "face5":"A"
+},{
+    "id_dice":"8",
+    "face0":"N",
+    "face1":"A",
+    "face2":"V",
+    "face3":"E",
+    "face4":"D",
+    "face5":"Z"
+},{
+    "id_dice":"9",
+    "face0":"E",
+    "face1":"I",
+    "face2":"O",
+    "face3":"A",
+    "face4":"T",
+    "face5":"A"
+},{
+    "id_dice":"10",
+    "face0":"G",
+    "face1":"L",
+    "face2":"E",
+    "face3":"N",
+    "face4":"Y",
+    "face5":"U"
+},{
+    "id_dice":"11",
+    "face0":"B",
+    "face1":"M",
+    "face2":"A",
+    "face3":"Qu",
+    "face4":"J",
+    "face5":"O"
+},{
+    "id_dice":"12",
+    "face0":"T",
+    "face1":"L",
+    "face2":"I",
+    "face3":"B",
+    "face4":"R",
+    "face5":"A"
+},{
+    "id_dice":"13",
+    "face0":"S",
+    "face1":"P",
+    "face2":"U",
+    "face3":"L",
+    "face4":"T",
+    "face5":"E"
+},{
+    "id_dice":"14",
+    "face0":"A",
+    "face1":"I",
+    "face2":"M",
+    "face3":"S",
+    "face4":"O",
+    "face5":"R"
+},{
+    "id_dice":"15",
+    "face0":"E",
+    "face1":"N",
+    "face2":"H",
+    "face3":"R",
+    "face4":"I",
+    "face5":"S"
+}]
