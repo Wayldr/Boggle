@@ -17,25 +17,29 @@
         </div>
     </header>
     <div class="container">
-        <main>        
-            <div class="playGround" id="playGround">
-                <div class="start btn" id="play">Start</div>
-                <div class="plateau" id="plateau"></div>
+        <main>
+            <div class="section1">        
+                <div class="playGround" id="playGround">
+                    <div class="start btn" id="play">Start</div>
+                    <div class="plateau" id="plateau"></div>
+                </div>
             </div>
-            <aside>
-                <div class="timer" id="timer">
-                    <div class="time" id="time">3:00</div>
-                    <div class="PLayResume">
-                        <div class="resume btn" id="resume">Resume</div>
-                        <div class="playtimer btn" id="playtimer">Play</div>
-                    </div>                
-                    <div class="resetTimer btn" id="resetTimer">Reset</div>
-                </div>
-                <div class="newGame" id="newGame">
-                </div>
-                <div class="rules">          
-                </div>
-            </aside>
+            <div class="section2">
+                <aside>
+                    <div class="timer" id="timer">
+                        <div class="time" id="time">3:00</div>
+                        <div class="PLayResume">
+                            <div class="resume btn" id="resume">Resume</div>
+                            <div class="playtimer btn" id="playtimer">Play</div>
+                        </div>                
+                        <div class="resetTimer btn" id="resetTimer">Reset</div>
+                    </div>
+                    <div class="newGame" id="newGame">
+                    </div>
+                    <div class="rules">          
+                    </div>
+                </aside>
+            </div>
         </main>
     </div>
     <footer>
@@ -51,17 +55,31 @@
     var btnResume=document.getElementById("resume");    
     var btnStart=document.getElementById("play");
     var btnResetTimer=document.getElementById("resetTimer");
+    var btnPlaytimer=document.getElementById("playtimer");
 
     btnStart.addEventListener('mouseup',()=>{
-        startCountdown();
+        startCountdown(179);
         play();
         btnStart.style.display='none';
         btnResume.style.display='block';
         btnResetTimer.style.display='block';
         });
-    btnResume.addEventListener('click',()=>{
+    btnResume.addEventListener('mouseup',()=>{
         resumeCountdown();
         btnResume.style.display='none';
+        btnPlaytimer.style.display='block';        
+    });
+    btnPlaytimer.addEventListener('mouseup',()=>{
+        startCountdown(secondsRemaining-1);
+        btnResume.style.display='block';
+        btnPlaytimer.style.display='none';        
+    });
+    btnResetTimer.addEventListener('mouseup',()=>{
+        resumeCountdown();
+        document.getElementById("time").innerHTML = "3:00";
+        secondsRemaining=180;
+        btnResume.style.display='none';
+        btnPlaytimer.style.display='block';        
     });
     function tick(){
         var timeDisplay = document.getElementById("time");
@@ -80,8 +98,8 @@
     function initiatCountdown(seconds){
         secondsRemaining=seconds;
     }
-    function startCountdown(){
-        initiatCountdown(180);
+    function startCountdown(time){
+        initiatCountdown(time);
         intervalHandle = setInterval(tick, 1000);
     }
     function resumeCountdown(){

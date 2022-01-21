@@ -7,7 +7,6 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-color: #f5f5f5;
 }
-
 .dice{
     background-color: rgb(217 217 217);
     border: 1px solid black;
@@ -38,6 +37,7 @@ main{
     background-color: darkgoldenrod;
     display: flex;
     border: 1 px solid black;
+    padding: 40px;
 }
 main{
     display: flex;
@@ -47,21 +47,25 @@ aside{
     border-left: 1 px solid black;
     margin: 15px;
     display: flex;
+    justify-content: center ;
 }
 .timer{
     border-bottom: 1 px solid black;
 }
 .time{
     font-size: 2em;
+    text-align: center;
 }
 .btn{
     background-color: cornsilk;
     box-shadow: 0 0 5px black;
-        box-shadow: 0 0 5px black;
-
+    box-shadow: 0 0 5px black;
     border-radius: 5px;
     font-size: 2em;
-    padding : 10px
+    padding : 10px;
+    width: 150px;
+    text-align: center;
+    margin: 15px;
 }
 .resume{
     display: none;
@@ -72,5 +76,14 @@ aside{
 .resetTimer{
     display: none;
 }
-
-
+.section1{
+    width: 70%;
+    border-right: 3px solid #dbba6b ;
+}
+.section2{
+    width: 30%;
+}
+.plateau{
+    display: flex;
+    justify-content: center;
+}
