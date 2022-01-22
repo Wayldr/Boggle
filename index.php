@@ -27,16 +27,57 @@
             <div class="section2">
                 <aside>
                     <div class="timer" id="timer">
-                        <div class="time" id="time">3:00</div>
-                        <div class="PLayResume">
-                            <div class="resume btn" id="resume">Resume</div>
-                            <div class="playtimer btn" id="playtimer">Play</div>
-                        </div>                
-                        <div class="resetTimer btn" id="resetTimer">Reset</div>
+                        <div class="time" id="time">- : - -</div>
+                        <div class="controlTimer">
+                            <div class="PLayResume">
+                                <div class="resume btn-2" id="resume">Resume</div>
+                                <div class="playtimer btn-2" id="playtimer">Play</div>
+                            </div>                
+                            <div class="resetTimer btn-2" id="resetTimer">Reset</div>
+                        </div>
                     </div>
-                    <div class="newGame" id="newGame">
-                    </div>
-                    <div class="rules">          
+                    <div class="gameControl">
+                        <div class="newGame btn-2" id="newGame">
+                            Nouvelle Partie
+                        </div>
+                        <div class="rules" title="règles complètes">     
+                            <h2>Règles :</h2>
+                            <h3>But du jeu :</h3>
+                            <p>Vous avez 3 minutes pour trouver le maximum de mots d'au moins trois lettres.</p>
+                            <p>Pour tracer un mot, vous pouvez passer d'une lettre à la suivante si elles sont adjacentes (diagonales comprises).</p>
+                            <p>Une lettre ne peut pas être utilisée plus d'une fois pour un même mot.</p>
+                            <h3>Comptage des points :</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Taille du mot</th>
+                                        <th>Nombre de points</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th >3 ou 4</th>
+                                        <td>1 point</td>
+                                    </tr>
+                                    <tr>
+                                        <th >5</th>
+                                        <td>2 points</td>
+                                    </tr>
+                                    <tr>
+                                        <th >6</th>
+                                        <td>3 points</td>
+                                    </tr>
+                                    <tr>
+                                        <th >7</th>
+                                        <td>5 points</td>
+                                    </tr>
+                                    <tr>
+                                        <th >8 ou plus</th>
+                                        <td>11 points</td>
+                                    </tr>
+                                </tbody>
+                            </table>                       
+                        </div>
                     </div>
                 </aside>
             </div>
@@ -56,6 +97,8 @@
     var btnStart=document.getElementById("play");
     var btnResetTimer=document.getElementById("resetTimer");
     var btnPlaytimer=document.getElementById("playtimer");
+    var btnNewGame=document.getElementById("newGame");
+
 
     btnStart.addEventListener('mouseup',()=>{
         startCountdown(179);
@@ -81,6 +124,14 @@
         btnResume.style.display='none';
         btnPlaytimer.style.display='block';        
     });
+    btnNewGame.addEventListener('mouseup',()=>{
+        resumeCountdown();
+        document.getElementById("time").innerHTML = "- : - -";
+        btnStart.style.display='block';
+        btnResume.style.display='none';
+        btnResetTimer.style.display='none';
+        plateau.innerHTML='';
+        });
     function tick(){
         var timeDisplay = document.getElementById("time");
         var min = Math.floor(secondsRemaining / 60);
@@ -116,21 +167,21 @@
 
     function play(){
         createGrille();
-        xmlhttp.send();
-        return isGaming=true
-    }
-    var xmlhttp = new XMLHttpRequest();
-    var url = "RollDices.php";
-    xmlhttp.open("GET", url, true);
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+        var xmlhttp = new XMLHttpRequest();
+        var url = "RollDices.php";
+        xmlhttp.open("GET", url, true);
+        xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                out=JSON.parse(this.responseText);
-                console.log(out);
-                 remplirGrille(out);
+                if (this.readyState == 4 && this.status == 200) {
+                    out=JSON.parse(this.responseText);
+                    console.log(out);
+                    remplirGrille(out);
+                }
             }
-        }
-    };   
+        };   
+        xmlhttp.send();
+    }
+    
     function remplirGrille(arrData){
             for (let i = 0; i < arrData.length; i++) {
             document.getElementById(`pos${i}`).innerHTML=`<div class="dice">${arrData[i]}</div>`;            

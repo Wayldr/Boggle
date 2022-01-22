@@ -25,6 +25,7 @@ body {
 header{
     height: 100px;
     background-color: darkgoldenrod;
+    
 }
 header h1{
     font-size: 2.6em;
@@ -32,40 +33,62 @@ header h1{
     margin: 0;
 }
 main{
-    padding-top: 80px;
     border-radius: 30px;
-    background-color: darkgoldenrod;
+    overflow: hidden ;
     display: flex;
     border: 1 px solid black;
-    padding: 40px;
-}
-main{
     display: flex;
     justify-content: space-between;
+    margin: 80px 0 80px 0;
+}
+.playGround{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 aside{
     border-left: 1 px solid black;
     margin: 15px;
     display: flex;
     justify-content: center ;
+    flex-shrink: 0;
+    flex-direction: column;
 }
 .timer{
-    border-bottom: 1 px solid black;
+    border-bottom: 1px solid black;
+    padding: 15px;
+    width: 100%;
 }
 .time{
     font-size: 2em;
     text-align: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.btn-2{
+    background-color: cornsilk;
+    /* box-shadow: 0 0 5px black; */
+    border-radius: 5px;
+    font-size: 1em;
+    padding : 10px;
+    width: 100px;
+    text-align: center;
+    margin: 15px;
+    cursor: pointer;
 }
 .btn{
     background-color: cornsilk;
-    box-shadow: 0 0 5px black;
-    box-shadow: 0 0 5px black;
+    /* box-shadow: 0 0 5px black; */
     border-radius: 5px;
     font-size: 2em;
     padding : 10px;
     width: 150px;
     text-align: center;
     margin: 15px;
+    cursor: pointer;
+}
+.btn:hover, .btn-2:hover{
+transform: scale(1.02);
 }
 .resume{
     display: none;
@@ -77,13 +100,70 @@ aside{
     display: none;
 }
 .section1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 70%;
-    border-right: 3px solid #dbba6b ;
+    background-color: #efdc93;
 }
 .section2{
     width: 30%;
+    background-color: darkgoldenrod;
 }
 .plateau{
     display: flex;
     justify-content: center;
+}
+.controlTimer{
+    display: flex;
+    justify-content: space-between;
+}
+.gameControl{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.newGame{
+    width: 80% ;
+    margin-top: 30px;
+}
+.rules h2{
+    text-decoration: underline;
+
+}
+/* .rules h2:hover{
+    color: #efdc93;
+} */
+aside thead{
+    background-color: #efdc93;
+}
+
+aside tbody {
+    background-color: #fff8dc;
+}
+aside table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: .8rem;
+}
+
+aside td,aside th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 5px 10px;
+}
+
+aside td {
+    text-align: center;
+    font-size: .8rem;
+}
+aside th {
+    font-size: 1rem;
+}
+.rules p{
+    font-size: 1em;
+}
+.section1 td:hover{
+    transform: scale(1.01);
 }
