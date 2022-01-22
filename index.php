@@ -11,14 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <!-- <header>
         <div class="container">
             <h1>Boggle</h1>
         </div>
-    </header>
+    </header> -->
     <div class="container">
-        <main>
-            <div class="section1">        
+        <main>        
+            <h1>Boggle</h1> 
+            <div class="section1">                    
                 <div class="playGround" id="playGround">
                     <div class="start btn" id="play">Start</div>
                     <div class="plateau" id="plateau"></div>
@@ -129,6 +130,7 @@
         document.getElementById("time").innerHTML = "- : - -";
         btnStart.style.display='block';
         btnResume.style.display='none';
+        btnPlaytimer.style.display='none';
         btnResetTimer.style.display='none';
         plateau.innerHTML='';
         });
