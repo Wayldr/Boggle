@@ -3,8 +3,12 @@ spl_autoload_register('monChargeur');
 function monChargeur($classe){
     require $classe.'.php';
     }
-$json=file_get_contents("DicesValue.json");
-$arrDicesValues=json_decode($json,true);
+
+$json=file_get_contents(__DIR__."/DicesValue.JSON");
+
+/* POUR LA PROD
+ $json=file_get_contents("/home/wayldr/www/DicesValue.JSON");
+ */$arrDicesValues=json_decode($json,true);
 
 $arrDices=array();
 
