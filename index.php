@@ -11,12 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- <header>
-        <div class="container">
-            <h1>Boggle</h1>
-        </div>
-    </header> -->
-    <div class="container">
+    <div class="tempsEcoule" id="tempsEcoule">
+        <h2>Temps écoulé</h2>
+        <div class="btn-continuer" id="continuer">Continuer</div>
+    </div>
+    <div class="container" id='container'>
         <main>        
             <h1>Boggle</h1> 
             <div class="section1">                    
@@ -99,6 +98,9 @@
     var btnResetTimer=document.getElementById("resetTimer");
     var btnPlaytimer=document.getElementById("playtimer");
     var btnNewGame=document.getElementById("newGame");
+    var btnContinuer=document.getElementById("continuer");
+    var ecranTempsEcoule=document.getElementById("tempsEcoule");
+    var container=document.getElementById("container");
 
 
     btnStart.addEventListener('mouseup',()=>{
@@ -134,6 +136,11 @@
         btnResetTimer.style.display='none';
         plateau.innerHTML='';
         });
+    btnContinuer.addEventListener('mouseup',()=>{
+        ecranTempsEcoule.style.display='none';
+        container.style.display='flex';
+        });
+
     function tick(){
         var timeDisplay = document.getElementById("time");
         var min = Math.floor(secondsRemaining / 60);
@@ -144,6 +151,8 @@
         var message = min.toString() + ":" + sec;        
         timeDisplay.innerHTML = message;
         if (secondsRemaining == 0){
+            ecranTempsEcoule.style.display='flex';
+            container.style.display='none';
             clearInterval(intervalHandle);
         }
         secondsRemaining--;
@@ -168,6 +177,7 @@
     var isGaming=false;
 
     function play(){
+        document.getElementById("time").innerHTML = "3:00";
         createGrille();
         var xmlhttp = new XMLHttpRequest();
         var url = "RollDices.php";
