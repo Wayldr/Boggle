@@ -136,7 +136,18 @@ aside{
     margin: 15px;
     cursor: pointer;
 }
-.btn:hover, .btn-2:hover, .btn-continuer:hover{
+.btnValider{
+    background-color: cornsilk;
+    /* box-shadow: 0 0 5px black; */
+    border-radius: 5px;
+    font-size: 1em;
+    padding : 5px;
+    width: 100px;
+    text-align: center;
+    margin: 15px;
+    cursor: pointer;
+}
+.btn:hover, .btnValider, .btn-2:hover, .btn-continuer:hover{
 transform: scale(1.02);
 }
 .resume{
@@ -261,3 +272,4 @@ aside th {
     margin: 15px;
     cursor: pointer;  
 }
+

@@ -5,10 +5,17 @@ var plateau=document.getElementById('plateau');
 var isGaming=false;
 var secondsRemaining;
 var intervalHandle;
+var previousLetter=false;
+var arrPreviousletters=Array();
+var inputWord=document.getElementById("inputWord");
+var btnValider=document.getElementById("btnValider");
+
 /*    var inputWord=document.getElementById("inputWord");
 var btnValider=document.getElementById("btnValider");
 var wordHistoric=document.getElementById('wordHistoric');
 var typingWord; */
+
+
     /* section-2 : timer/controlleur */
 var btnResume=document.getElementById("resume");    
 var btnStart=document.getElementById("play");
@@ -30,6 +37,12 @@ btnStart.addEventListener('mouseup',()=>{
     btnResume.style.display='block';
     btnResetTimer.style.display='block';
 });
+btnValider.addEventListener('mouseup',()=>{
+    wordHistoric.innerHTML+=inputWord.innerHTML+"<br>";
+    inputWord.innerHTML='';
+    previousLetter=false;
+    arrPreviousletters=array();
+})
 /* inputWord.addEventListener('input',()=>{
     typingWord=inputWord.value;
 });
@@ -83,14 +96,16 @@ function play(){
                 out=JSON.parse(this.responseText);
                 console.log(out);
                 remplirGrille(out);
+                createListener();
             }
         }
+
     };   
     xmlhttp.send();
 }
 function remplirGrille(arrData){
         for (let i = 0; i < arrData.length; i++) {
-        document.getElementById(`pos${i}`).innerHTML=`<div class="dice">${arrData[i]}</div>`;            
+        document.getElementById(`${i}`).innerHTML=arrData[i];            
         }
 }
 function createGrille(){
@@ -98,13 +113,58 @@ function createGrille(){
     for (let i = 0; i <=12 ; i+=4) {
         grille+=`<tr>`;
         for (let j = 0; j < 4; j++) {
-            grille+="<td id='pos"+(j+i)+"'></td>";
+            grille+="<td class='dice' id='"+(j+i)+"'></td>";
         }
         grille+=`</tr>`;
     }
     grille+="</tbody></table>";
     plateau.innerHTML=grille;
 }    
+function createListener() {
+    var listedice=document.querySelectorAll('.plateau td');
+    listedice=Array.from(listedice);
+    listedice.forEach(element => {
+        element.addEventListener('click',clickOnDice);
+    })
+}
+function clickOnDice(event) {
+    el=event.target
+    id=parseInt(el.id);
+    stat=false; // indique si je peux cliquer dessus
+    if (previousLetter) {
+        let arr = [1,4,5,3];
+        let good = [];
+        let scope = 15;
+        arr.forEach(element => {
+            if (arrPreviousletters.indexOf(id)==-1){
+                i = previousLetter+element;
+                if (i >= 0 && i <= scope) good.push(i);
+                i = previousLetter-element;
+                if (i >= 0 && i <= scope) good.push(i);
+            }
+        });
+        if (good.indexOf(id)>-1){
+            stat=true;
+        }        
+    } else {
+        stat=true;
+    }
+    if (stat){
+        arrPreviousletters.push(id);
+        previousLetter=id;
+        inputWord.innerHTML+=el.innerHTML;//add au mot courant
+    }
+    /* 
+    verfier droit d'ajouter(
+        connaitre précedent
+        regarder si concomitant
+        retourner true/false
+    )
+    recupere innerHTML
+    ajoute au mot courant
+     */
+    }
+    
 
 function tick(){
     var timeDisplay = document.getElementById("time");
