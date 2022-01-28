@@ -22,6 +22,13 @@
                 <div class="playGround" id="playGround">
                     <div class="start btn" id="play">Start</div>
                     <div class="plateau" id="plateau"></div>
+                    <div class="zoneMot">
+                        <div class="zoneInputWord">
+                            <span id="inputWord"></span>
+                            <div class="btnValider" id="btnValider">Valider</div>
+                        </div>
+                        <div class="wordHistoric" id="wordHistoric"></div>
+                    </div>
                 </div>
             </div>
             <div class="section2">
