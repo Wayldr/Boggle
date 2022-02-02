@@ -41,7 +41,7 @@ btnValider.addEventListener('mouseup',()=>{
     wordHistoric.innerHTML+=inputWord.innerHTML+"<br>";
     inputWord.innerHTML='';
     previousLetter=false;
-    arrPreviousletters=array();
+    arrPreviousletters=Array();
 })
 /* inputWord.addEventListener('input',()=>{
     typingWord=inputWord.value;
