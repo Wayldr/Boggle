@@ -17,6 +17,7 @@ body {
     height: 2.2em;
     padding-top: 0.5em;
     text-align: center;
+    cursor: pointer;
 }
 @media screen and (min-width: 991px) {
     .dice{
