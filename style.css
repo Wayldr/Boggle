@@ -9,8 +9,8 @@ body {
 }
 .dice{
     background-color: #fff8dc;
-    border: 1px solid black;
-    font-weight: 500;
+/*     border: 1px solid black;
+ */    font-weight: 500;
     border-radius: 5px;
     font-size: 1.8em;
     width: 2.2em;

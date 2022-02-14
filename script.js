@@ -1,5 +1,5 @@
 /* init */
-/* section-1 : plateau de jeu*/
+    /* section-1 : plateau de jeu*/
 var grille='';
 var plateau=document.getElementById('plateau');
 var isGaming=false;
@@ -22,7 +22,7 @@ var btnStart=document.getElementById("play");
 var btnResetTimer=document.getElementById("resetTimer");
 var btnPlaytimer=document.getElementById("playtimer");
 var btnNewGame=document.getElementById("newGame");
-    /*écran fin*/
+    /*section-3 : écran fin*/
 var ecranTempsEcoule=document.getElementById("tempsEcoule");
 var container=document.getElementById("container");
 var btnContinuer=document.getElementById("continuer");
@@ -38,10 +38,12 @@ btnStart.addEventListener('mouseup',()=>{
     btnResetTimer.style.display='block';
 });
 btnValider.addEventListener('mouseup',()=>{
+    //formater input word en full majuscule ou minuscule
     wordHistoric.innerHTML+=inputWord.innerHTML+"<br>";
     inputWord.innerHTML='';
     previousLetter=false;
     arrPreviousletters=Array();
+    refreshStyle();
 })
 /* inputWord.addEventListener('input',()=>{
     typingWord=inputWord.value;
@@ -154,17 +156,30 @@ function clickOnDice(event) {
         previousLetter=id;
         inputWord.innerHTML+=el.innerHTML;//add au mot courant
     }
-    /* 
-    verfier droit d'ajouter(
-        connaitre précedent
-        regarder si concomitant
-        retourner true/false
-    )
-    recupere innerHTML
-    ajoute au mot courant
-     */
-    }
-    
+}
+function refreshStyle(){
+   for (let index = 0; index < 16 ; index++) {
+        el=getElementById(index);
+        el.style.border='none';
+        el.style.boxshadow='none';   
+}
+}
+function renduVisuel(good,current){
+    refreshStyle();
+    // pour chaque bonne lettre
+        // style -> border vert brillant
+    good.forEach(element => {
+        document.getElementById(element).style.boxShadow='inset 0 0 30px green';
+    });
+    //pour chaque lettre deja cliké
+    current.forEach(element => {
+        document.getElementById(element).style.border='2px solid green';
+        // style -> border vert ou orange
+    });
+        
+    // si pas de mot en cours OU Valide le mots
+        // style -> border       
+}
 
 function tick(){
     var timeDisplay = document.getElementById("time");
