@@ -7,6 +7,12 @@ var secondsRemaining;
 var intervalHandle;
 var previousLetter=false;
 var arrPreviousletters=Array();
+//tableau lettre bonne  = toute les lettre
+var good=[];
+for (let index = 0; index < 16; index++) {
+    good.push(index); 
+}
+var arrPreviousletters=Array();
 var inputWord=document.getElementById("inputWord");
 var btnValider=document.getElementById("btnValider");
 
@@ -43,6 +49,10 @@ btnValider.addEventListener('mouseup',()=>{
     inputWord.innerHTML='';
     previousLetter=false;
     arrPreviousletters=Array();
+    good=[];
+    for (let index = 0; index < 16; index++) {
+        good.push(index); 
+    }
     refreshStyle();
 })
 /* inputWord.addEventListener('input',()=>{
@@ -132,6 +142,42 @@ function createListener() {
 function clickOnDice(event) {
     el=event.target
     id=parseInt(el.id);
+    stat=false;
+    // j'ai un tableau good qui contien tout les dès valide
+    // si pas de mot en cours
+    if (!previousLetter){
+        stat=true;
+        //valide lettre
+    } else if (good.indexOf(id)>-1){
+        stat=true; 
+    }
+        
+    if (stat){
+        arrPreviousletters.push(id);//ajoute au tableau mot en cours
+        previousLetter=id;
+        inputWord.innerHTML+=el.innerHTML;//add au mot courant
+        //redéfini le tableau good
+        let arr = [1,4,5,3];
+        good = [];
+        let scope = 15;
+        arr.forEach(element => {
+            i = previousLetter+element;
+            if (i >= 0 && i <= scope && arrPreviousletters.indexOf(i)==-1){
+                good.push(i);
+            }
+            i = previousLetter-element;
+            if (i >= 0 && i <= scope && arrPreviousletters.indexOf(i)==-1){
+                good.push(i);
+            }           
+        });   
+        renduVisuel(good,arrPreviousletters);
+
+    }
+}
+
+/* function clickOnDice(event) {
+    el=event.target
+    id=parseInt(el.id);
     stat=false; // indique si je peux cliquer dessus
     if (previousLetter) {
         let arr = [1,4,5,3];
@@ -156,13 +202,14 @@ function clickOnDice(event) {
         previousLetter=id;
         inputWord.innerHTML+=el.innerHTML;//add au mot courant
     }
-}
+} */
 function refreshStyle(){
-   for (let index = 0; index < 16 ; index++) {
-        el=getElementById(index);
-        el.style.border='none';
-        el.style.boxshadow='none';   
-}
+    for (let index = 0; index < 16 ; index++) {
+        el=document.getElementById(index);
+        el.style.border='';
+        el.style.boxShadow='';  
+        el.style.color='black';
+    }
 }
 function renduVisuel(good,current){
     refreshStyle();
@@ -173,7 +220,8 @@ function renduVisuel(good,current){
     });
     //pour chaque lettre deja cliké
     current.forEach(element => {
-        document.getElementById(element).style.border='2px solid green';
+        document.getElementById(element).style.border='4px solid green';
+        document.getElementById(element).style.color='green';
         // style -> border vert ou orange
     });
         
