@@ -157,23 +157,40 @@ function clickOnDice(event) {
         previousLetter=id;
         inputWord.innerHTML+=el.innerHTML;//add au mot courant
         //redéfini le tableau good
-        let arr = [1,4,5,3];
+        var arr = [-1,-3,-4,-5,1,3,4,5];
+        
+        var toDelet=[];
+        switch (previousLetter) {
+            case 0:
+            case 4: 
+            case 8: 
+            case 12:
+                arr = [-3,-4,1,4,5];
+                break;
+            case 3: 
+            case 7: 
+            case 11:
+            case 15:
+                arr = [-1,-4,-5,3,4];
+                break;
+        }
         good = [];
         let scope = 15;
         arr.forEach(element => {
             i = previousLetter+element;
             if (i >= 0 && i <= scope && arrPreviousletters.indexOf(i)==-1){
                 good.push(i);
-            }
-            i = previousLetter-element;
-            if (i >= 0 && i <= scope && arrPreviousletters.indexOf(i)==-1){
-                good.push(i);
             }           
         });   
         renduVisuel(good,arrPreviousletters);
-
     }
 }
+/* function deletValueFromArray(arrToDelet,from){
+    arrToDelet.forEach(element => {
+       idToDelet=from.indexOf(element);
+       from.splice(idToDelet,idToDelet+1)
+    });
+} */
 
 /* function clickOnDice(event) {
     el=event.target
