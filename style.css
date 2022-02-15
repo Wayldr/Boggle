@@ -6,6 +6,7 @@ body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     background-color: #f5f5f5;
+    user-select: none;
 }
 .dice{
     background-color: #fff8dc;
@@ -255,7 +256,6 @@ aside tbody {
 }
 aside table {
     border-collapse: collapse;
-    border: 2px solid rgb(200, 200, 200);
     border-radius: 10px;
     overflow: hidden;
     letter-spacing: 1px;
@@ -264,7 +264,6 @@ aside table {
 }
 
 aside td,aside th {
-    border: 1px solid rgb(190, 190, 190);
     padding: 5px 10px;
 }
 
