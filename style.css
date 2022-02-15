@@ -95,6 +95,25 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction:column ;
+    flex-shrink: 1;
+    width: 100%;
+}
+.zoneMot{
+    width: 100%;
+    display: none;
+    justify-content: center;
+}
+.zoneInputWord{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wordHistoric{
+    padding: 10px 40px;
+    width: 100%;
+    max-width: 100%;
 }
 aside{
     border-left: 1 px solid black;
@@ -143,12 +162,21 @@ aside{
     border-radius: 5px;
     font-size: 1em;
     padding : 5px;
-    width: 100px;
-    text-align: center;
+/*     width: 100px;
+ */    text-align: center;
     margin: 15px;
     cursor: pointer;
 }
-.btn:hover, .btnValider, .btn-2:hover, .btn-continuer:hover{
+.inputword{
+    background-color: cornsilk;
+    border-radius: 5px;
+    font-size: 1em;
+    padding : 5px;
+    margin: 15px;
+    width: 200px;
+    height: 29.58px;
+}
+.btn:hover, .btnValider:hover, .btn-2:hover, .btn-continuer:hover{
 transform: scale(1.02);
 }
 .resume{
@@ -228,6 +256,8 @@ aside tbody {
 aside table {
     border-collapse: collapse;
     border: 2px solid rgb(200, 200, 200);
+    border-radius: 10px;
+    overflow: hidden;
     letter-spacing: 1px;
     font-family: sans-serif;
     font-size: .8rem;

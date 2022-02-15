@@ -15,6 +15,7 @@ for (let index = 0; index < 16; index++) {
 var arrPreviousletters=Array();
 var inputWord=document.getElementById("inputWord");
 var btnValider=document.getElementById("btnValider");
+var zoneMots=document.getElementById("zoneMot");
 
 /*    var inputWord=document.getElementById("inputWord");
 var btnValider=document.getElementById("btnValider");
@@ -42,10 +43,11 @@ btnStart.addEventListener('mouseup',()=>{
     btnStart.style.display='none';
     btnResume.style.display='block';
     btnResetTimer.style.display='block';
+    zoneMots.style.display='flex';
 });
 btnValider.addEventListener('mouseup',()=>{
     //formater input word en full majuscule ou minuscule
-    wordHistoric.innerHTML+=inputWord.innerHTML+"<br>";
+    wordHistoric.innerHTML+=inputWord.innerHTML+", ";
     inputWord.innerHTML='';
     previousLetter=false;
     arrPreviousletters=Array();
