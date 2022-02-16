@@ -17,4 +17,5 @@ foreach ($arrDicesValues as $key => $value) {
     $arrDices[]=$dice->rollDice();  
 }
 shuffle($arrDices);
+echo json_encode($arrDices);
 ?>

@@ -12,15 +12,13 @@ var good=[];
 for (let index = 0; index < 16; index++) {
     good.push(index); 
 }
-var arrPreviousletters=Array();
+var scoreTotal;
+var arrWordSave=[];
 var inputWord=document.getElementById("inputWord");
 var btnValider=document.getElementById("btnValider");
 var zoneMots=document.getElementById("zoneMot");
-
-/*    var inputWord=document.getElementById("inputWord");
-var btnValider=document.getElementById("btnValider");
 var wordHistoric=document.getElementById('wordHistoric');
-var typingWord; */
+var typingWord;
 
 
     /* section-2 : timer/controlleur */
@@ -47,7 +45,9 @@ btnStart.addEventListener('mouseup',()=>{
 });
 btnValider.addEventListener('mouseup',()=>{
     //formater input word en full majuscule ou minuscule
-    wordHistoric.innerHTML+=inputWord.innerHTML+", ";
+    arrWordSave.push(inputWord.innerHTML)
+    listeWord=arrWordSave.join(', ');
+    wordHistoric.innerHTML=listeWord;
     inputWord.innerHTML='';
     previousLetter=false;
     arrPreviousletters=Array();
@@ -72,7 +72,9 @@ btnNewGame.addEventListener('mouseup',()=>{
     btnResume.style.display='none';
     btnPlaytimer.style.display='none';
     btnResetTimer.style.display='none';
+    zoneMots.style.display='none';
     plateau.innerHTML='';
+    wordHistoric.innerHTML="";
 });
 btnContinuer.addEventListener('mouseup',()=>{
     ecranTempsEcoule.style.display='none';
@@ -247,6 +249,53 @@ function renduVisuel(good,current){
     // si pas de mot en cours OU Valide le mots
         // style -> border       
 }
+function Verifmot(array){  
+    //supprime les mots de moins de 3 lettre
+    arrTemp=array.filter(word => word.length > 2);
+    array=arrTemp;
+    //supprime les doubles
+    arrTemp=array.filter(function(ele , pos){
+        return array.indexOf(ele) == pos;
+    })
+    array=arrTemp;
+
+    array.forEach(element => {
+        console.log(element)
+    });
+    //verif dans le dico
+}
+/* function recupArrListeMots(){
+    //recup liste
+    liste=wordHistoric.innerHTML;
+    //enleve blanc 
+    liste.replace(' ','')
+    
+    //transforme en tableau
+} */
+//fonction calcul pour chaque mot calcul en fonciton de sa longueur
+function calculScore(arrMotsValide){
+    arrMotsValide.forEach(element => {
+        switch (element.length) {
+            case 3:
+            case 4:    
+                scoreTotal+=1;
+                break;
+            case 5:    
+                scoreTotal+=2;
+                break;
+            case 6:    
+                scoreTotal+=3;
+                break;
+            case 7:    
+                scoreTotal+=5;
+                break;
+            default:
+                scoreTotal+=11;
+                break;
+        }
+    });
+}
+
 
 function tick(){
     var timeDisplay = document.getElementById("time");
