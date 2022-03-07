@@ -4,6 +4,7 @@ require_once 'connect.php';
 $mot=strtolower($_GET['mot']);
 
 /* $mot='mot' */;
+
 $requeteSelectMot="SELECT id FROM dictionnaire_francais WHERE mots='$mot'"; 
 $resultat=$bdd->querySingle($requeteSelectMot);
 

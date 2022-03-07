@@ -2,9 +2,11 @@
     /* section-1 : plateau de jeu*/
 var grille='';
 var plateau=document.getElementById('plateau');
+var listeMotsTrouves=document.getElementById("motsTrouves");
 var isGaming=false;
 var secondsRemaining;
 var intervalHandle;
+
 var previousLetter=false;
 var arrPreviousletters=Array();
 //tableau lettre bonne  = toute les lettre
@@ -12,8 +14,9 @@ var good=[];
 for (let index = 0; index < 16; index++) {
     good.push(index); 
 }
-var scoreTotal;
+var scoreTotal=0;
 var arrWordSave=[];
+var arrWordSaveWithoutDoble=[];
 listeWord='';
 var inputWord=document.getElementById("inputWord");
 var btnValider=document.getElementById("btnValider");
@@ -102,7 +105,22 @@ btnNewGame.addEventListener('mouseup',()=>{
     listeWord='';
     wordHistoric.innerHTML="";
 });
+//btnContinuer.addEventListener('mouseup',()=>{
+//    ecranTempsEcoule.style.display='none';
+//    container.style.display='flex';
+//});
+
 btnContinuer.addEventListener('mouseup',()=>{
+    resumeCountdown();
+    document.getElementById("time").innerHTML = "- : - -";
+    btnStart.style.display='block';
+    btnResume.style.display='none';
+    btnPlaytimer.style.display='none';
+    btnResetTimer.style.display='none';
+    zoneMots.style.display='none';
+    plateau.innerHTML='';
+    listeWord='';
+    wordHistoric.innerHTML="";
     ecranTempsEcoule.style.display='none';
     container.style.display='flex';
 });
@@ -250,6 +268,32 @@ function clickOnDice(event) {
         inputWord.innerHTML+=el.innerHTML;//add au mot courant
     }
 } */
+function finDePartie(){
+    listeMot='';
+    arrTemp=[];
+
+    arrWordSave.forEach(element=>{
+        if (arrTemp.indexOf(element.contenu)==-1){
+        arrWordSaveWithoutDoble.push(element);
+        arrTemp.push(element.contenu);
+        }
+    })
+    //arrWordSaveWithoutDoble=arrWordSave.filter(function(ele , pos){
+      //  return arrWordSave.indexOf(ele.contenu) == pos;})
+    arrWordSaveWithoutDoble.forEach(element=> {
+        if (element.IsValide){
+            listeMot+='<li class="motValid">'+element.contenu+'</li>';
+        } else {
+            listeMot+='<li class="motInvalide">'+element.contenu+'</li>';
+        }
+    } )
+    calculScore(arrWordSaveWithoutDoble)
+    listeMotsTrouves.innerHTML="<ul>"+listeMot+"</ul><br>Score totale : "+scoreTotal;
+    //afficher les mot enregistré
+        //permettre de modifier la validité d'un mot
+        //afficher le score finale 
+}
+
 function refreshStyle(){
     for (let index = 0; index < 16 ; index++) {
         el=document.getElementById(index);
@@ -275,8 +319,9 @@ function renduVisuel(good,current){
     // si pas de mot en cours OU Valide le mots
         // style -> border       
 }
-function Verifmot(array){  
+function Verifmot(){  
     //supprime les mots de moins de 3 lettre
+    array=['mot','lot','lot','nouille'];
     arrTemp=array.filter(word => word.length > 2);
     array=arrTemp;
     //supprime les doubles
@@ -284,12 +329,12 @@ function Verifmot(array){
         return array.indexOf(ele) == pos;
     })
     array=arrTemp;
+    return array;
 
-    array.forEach(element => {
-        console.log(element)
-    });
+  
+
     //verif dans le dico
-    isValid(array);
+    //isValid(array);
     //https://api.dictionaryapi.dev/api/v2/entries/fr/Mots
 }
 
@@ -325,7 +370,7 @@ function isValid(newWord){
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.readyState == 4 && this.status == 200) {
-                    if (this.responseText =="1"){
+                    if (this.responseText =="1" && newWord.length>2){
                         newWordIsValid=true;
                     }
                     Word = new Mot (newWord,newWordIsValid)
@@ -372,23 +417,25 @@ function isValid(newWord){
 //fonction calcul pour chaque mot calcul en fonciton de sa longueur
 function calculScore(arrMotsValide){
     arrMotsValide.forEach(element => {
-        switch (element.length) {
-            case 3:
-            case 4:    
-                scoreTotal+=1;
-                break;
-            case 5:    
-                scoreTotal+=2;
-                break;
-            case 6:    
-                scoreTotal+=3;
-                break;
-            case 7:    
-                scoreTotal+=5;
-                break;
-            default:
-                scoreTotal+=11;
-                break;
+        if (element.IsValide){
+            switch (element.longueur) {
+                case 3:
+                case 4:    
+                    scoreTotal+=1;
+                    break;
+                case 5:    
+                    scoreTotal+=2;
+                    break;
+                case 6:    
+                    scoreTotal+=3;
+                    break;
+                case 7:    
+                    scoreTotal+=5;
+                    break;
+                default:
+                    scoreTotal+=11;
+                    break;
+            }
         }
     });
 }
@@ -404,7 +451,8 @@ function tick(){
     var message = min.toString() + ":" + sec;        
     timeDisplay.innerHTML = message;
     if (secondsRemaining == 0){
-        ecranTempsEcoule.style.display='flex';
+        finDePartie();
+        ecranTempsEcoule.style.display='flex';       
         container.style.display='none';
         clearInterval(intervalHandle);
     }

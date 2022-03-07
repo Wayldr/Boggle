@@ -304,3 +304,10 @@ aside th {
     cursor: pointer;  
 }
 
+.motValid{
+    color: green;
+}
+.motInvalide{
+    color: red;
+    text-decoration: line-through;
+}

@@ -13,7 +13,8 @@
 <body>
     <div class="tempsEcoule" id="tempsEcoule">
         <h2>Temps écoulé</h2>
-        <div class="btn-continuer" id="continuer">Continuer</div>
+        <div id="motsTrouves"></div>
+        <div class="btn-continuer" id="continuer">Nouvelle partie</div>
     </div>
     <div class="container" id='container'>
         <main>        
