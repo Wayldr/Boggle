@@ -14,11 +14,21 @@ for (let index = 0; index < 16; index++) {
 }
 var scoreTotal;
 var arrWordSave=[];
+listeWord='';
 var inputWord=document.getElementById("inputWord");
 var btnValider=document.getElementById("btnValider");
 var zoneMots=document.getElementById("zoneMot");
 var wordHistoric=document.getElementById('wordHistoric');
 var typingWord;
+
+class Mot {
+    constructor(mot,isValid) {
+      this.contenu = mot;
+      this.longueur = mot.length;
+      this.IsValide = isValid;
+    }
+  }
+  
 
 
     /* section-2 : timer/controlleur */
@@ -44,12 +54,27 @@ btnStart.addEventListener('mouseup',()=>{
     zoneMots.style.display='flex';
 });
 btnValider.addEventListener('mouseup',()=>{
-    //formater input word en full majuscule ou minuscule
-    arrWordSave.push(inputWord.innerHTML)
-    listeWord=arrWordSave.join(', ');
-    wordHistoric.innerHTML=listeWord;
+    newWord=inputWord.innerHTML
+    newWordIsValid=isValid(newWord);
+    
+    /* arrWordSaveTemp=[];
+    arrWordSaveTemp.push(inputWord.innerHTML)
+    for (let index = 0; index < arrWordSaveTemp.length; index++) {
+        const element = array[index];
+        arrWordSaveTemp.forEach(element => {
+            
+            m
+        });
+    } */
+    arrWordSave.forEach(element => {
+        listeWord+=element.contenu+", ";
+    });
+    //listeWord=arrWordSave.join(', ');
+
+    wordHistoric.innerHTML=listeWord.substring(0,listeWord.length-2);
     inputWord.innerHTML='';
     previousLetter=false;
+    listeWord='';
     arrPreviousletters=Array();
     good=[];
     for (let index = 0; index < 16; index++) {
@@ -74,6 +99,7 @@ btnNewGame.addEventListener('mouseup',()=>{
     btnResetTimer.style.display='none';
     zoneMots.style.display='none';
     plateau.innerHTML='';
+    listeWord='';
     wordHistoric.innerHTML="";
 });
 btnContinuer.addEventListener('mouseup',()=>{
@@ -159,7 +185,7 @@ function clickOnDice(event) {
     if (stat){
         arrPreviousletters.push(id);//ajoute au tableau mot en cours
         previousLetter=id;
-        inputWord.innerHTML+=el.innerHTML;//add au mot courant
+        inputWord.innerHTML+=el.innerHTML.toUpperCase();//add au mot courant
         //redéfini le tableau good
         var arr = [-1,-3,-4,-5,1,3,4,5];
         
@@ -168,8 +194,8 @@ function clickOnDice(event) {
             case 0:
             case 4: 
             case 8: 
-            case 12:
-                arr = [-3,-4,1,4,5];
+            case 12: 
+                arr = [1,4,5,-3,-4];
                 break;
             case 3: 
             case 7: 
@@ -263,7 +289,77 @@ function Verifmot(array){
         console.log(element)
     });
     //verif dans le dico
+    isValid(array);
+    //https://api.dictionaryapi.dev/api/v2/entries/fr/Mots
 }
+
+//verif dans le dico
+/* function isValid(array){
+    //boucle sur le tableau
+    array.forEach(element => {
+        var xmlhttp = new XMLHttpRequest();
+        var url = `https://api.dictionaryapi.dev/api/v2/entries/fr/${element}`;
+        xmlhttp.open("GET", url, true);
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.responseText)
+                    out=JSON.parse(this.responseText);
+                    element.IsValide=1
+                    console.log(element.IsValide);
+                }
+            }
+            
+        };   
+        xmlhttp.send();
+        console.log(element.IsValide);
+
+    }); */
+
+function isValid(newWord){
+    //boucle sur le tableau
+        newWordIsValid=false;
+        var xmlhttp = new XMLHttpRequest();
+        var url = `Dictionnaire.php?mot=${newWord}`;
+        xmlhttp.open("GET", url, true);
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.responseText =="1"){
+                        newWordIsValid=true;
+                    }
+                    Word = new Mot (newWord,newWordIsValid)
+                    arrWordSave.push(Word)
+                    arrWordSave.forEach(element => {
+                        listeWord+=element.contenu+", ";
+                    });
+                    //listeWord=arrWordSave.join(', ');
+                
+                    wordHistoric.innerHTML=listeWord.substring(0,listeWord.length-2);
+                    inputWord.innerHTML='';
+                    previousLetter=false;
+                    listeWord='';
+                    arrPreviousletters=Array();
+                    good=[];
+                    for (let index = 0; index < 16; index++) {
+                        good.push(index); 
+                    }
+                    refreshStyle();
+                }
+            }            
+        } 
+        xmlhttp.send();
+        return newWordIsValid;
+
+
+        //fait la requete
+        //si existe 
+            //calcul point
+
+            //renvoi que c nul
+
+};
+
 /* function recupArrListeMots(){
     //recup liste
     liste=wordHistoric.innerHTML;
@@ -272,6 +368,7 @@ function Verifmot(array){
     
     //transforme en tableau
 } */
+
 //fonction calcul pour chaque mot calcul en fonciton de sa longueur
 function calculScore(arrMotsValide){
     arrMotsValide.forEach(element => {
