@@ -6,15 +6,35 @@ $mot=strtolower($_GET['mot']);
 /* $mot='mot' */;
 
 $requeteSelectMot="SELECT id FROM dictionnaire_francais WHERE mots='$mot'"; 
-$resultat=$bdd->querySingle($requeteSelectMot);
 
-/* print_r($resultat);
- */
+//////SQLITE3
+/* $resultat=$bdd->querySingle($requeteSelectMot);
+
+
+
 if ($resultat){
     echo 1;
 }
 
-$bdd->close();
+$bdd->close(); */
+
+//////PDO-SQLITE
+
+$resultat=$bdd->query($requeteSelectMot);
+//$resultat=$bdd->querySingle($requeteSelectMot);
+
+if ($resultat){
+    echo 1;
+}
+
+
+
+
+
+
+
+
+
 
 
 /* $mot='mot';

@@ -17,6 +17,8 @@ if ($bdd->connect_errno) {
 echo $bdd->host_info . "\n";
  */
 
+$fichier = "dictionnaire_francais.db";
+$bdd = new PDO("sqlite:$fichier");
 
-$bdd= new SQLite3('dictionnaire_francais.db',SQLITE3_OPEN_READONLY);
+//$bdd= new SQLite3('dictionnaire_francais.db',SQLITE3_OPEN_READONLY);
 ?>
