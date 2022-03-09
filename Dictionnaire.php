@@ -20,7 +20,9 @@ $bdd->close(); */
 
 //////PDO-SQLITE
 
-$resultat=$bdd->query($requeteSelectMot);
+$requete=$bdd->prepare($requeteSelectMot);
+$requete->execute();
+$resultat=$requete->fetch(PDO::FETCH_ASSOC);
 //$resultat=$bdd->querySingle($requeteSelectMot);
 
 if ($resultat){
