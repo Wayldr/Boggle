@@ -123,6 +123,9 @@ btnContinuer.addEventListener('mouseup',()=>{
     wordHistoric.innerHTML="";
     ecranTempsEcoule.style.display='none';
     container.style.display='flex';
+    arrWordSave=[];
+    arrWordSaveWithoutDoble=[];
+    listeMotsTrouves='';
 });
 
 btnResume.addEventListener('mouseup',()=>{
