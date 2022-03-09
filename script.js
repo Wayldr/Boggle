@@ -104,6 +104,9 @@ btnNewGame.addEventListener('mouseup',()=>{
     plateau.innerHTML='';
     listeWord='';
     wordHistoric.innerHTML="";
+    arrWordSave=[];
+    arrWordSaveWithoutDoble=[];
+    listeMotsTrouves='';
 });
 //btnContinuer.addEventListener('mouseup',()=>{
 //    ecranTempsEcoule.style.display='none';
