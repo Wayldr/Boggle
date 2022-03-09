@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule http://wayldr.com/boggle http://wayldr.com/Boggle
+RewriteRule http://www.wayldr.com/boggle http://www.wayldr.com/Boggle
